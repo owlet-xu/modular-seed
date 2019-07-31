@@ -1,0 +1,15 @@
+.fullcalendar-test {
+    width: 100%;
+    height: 100vh;
+    .calendar {
+        width: 700px;
+        height: 200px;
+    }
+    /deep/ .fc-day-top {
+        text-align: center;
+        font-size: 30px;
+        .fc-day-number {
+            clear: both;
+        }
+    }
+}

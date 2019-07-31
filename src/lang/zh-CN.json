@@ -1,0 +1,11 @@
+{
+  "Home": {
+    "HomePage": "主页",
+    "RoutePush": "路由跳转",
+    "LanguageChinese": "中文",
+    "LanguageEnglish": "英文"
+  },
+  "IncidentType": {
+    "Title": "标题"
+  }
+}
