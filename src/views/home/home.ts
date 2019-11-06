@@ -25,4 +25,12 @@ export default class Home extends Vue {
   toCalendar() {
     this.$router.push('/fullcalendar-test');
   }
+
+  toElementUiTest() {
+    this.$router.push('/elementui-test');
+  }
+
+  toFormTest() {
+    this.$router.push('/form-test');
+  }
 }
