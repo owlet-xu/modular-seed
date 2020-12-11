@@ -6,7 +6,7 @@ module.exports = {
     css: {
         loaderOptions: {
             sass: {
-                data: `@import "@/assets/styles/helpers/mixin.scss";`
+                data: `@import "@/assets/styles/index.scss";`
             }
         }
     }

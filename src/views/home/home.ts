@@ -7,6 +7,7 @@ export default class Home extends Vue {
   @Getter('language') getLanguage!: string;
 
   private language = '';
+  private theme = 'dark';
 
   created() {
     this.language = this.getLanguage;
@@ -16,6 +17,11 @@ export default class Home extends Vue {
   languageChange(val: any) {
     this.setLanguage(val);
     this.$router.go(0);
+  }
+
+  changeThemes() {
+    this.theme = this.theme === 'dark' ? 'light' : 'dark';
+    window.document.documentElement.setAttribute('data-theme', this.theme);
   }
 
   toIncidentType() {
@@ -32,5 +38,25 @@ export default class Home extends Vue {
 
   toFormTest() {
     this.$router.push('/form-test');
+  }
+
+  toElectronWebViewTest() {
+    this.$router.push('/electron-webview-test');
+  }
+
+  toXlsxTest() {
+    this.$router.push('/xlsx-test');
+  }
+
+  toXlsxStyleTest() {
+    this.$router.push('/xlsx-style-test');
+  }
+
+  toRemTest() {
+    this.$router.push('/rem-test');
+  }
+
+  toTransitionTest() {
+    this.$router.push('/tansition-test');
   }
 }

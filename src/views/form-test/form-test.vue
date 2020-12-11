@@ -1,5 +1,7 @@
 <template>
   <div>
+    父组件
+    <FormItems :childData.sync="childData"></FormItems>
   </div>
 </template>
 
