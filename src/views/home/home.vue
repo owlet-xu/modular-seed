@@ -14,6 +14,7 @@
       <el-button @click="toRemTest">remTest</el-button>
       <el-button @click="toTransitionTest">动画</el-button>
       <el-button @click="changeThemes">主题切换</el-button>
+      <el-button @click="dragTest">拖动测试</el-button>
     </div>
   </div>
 </template>

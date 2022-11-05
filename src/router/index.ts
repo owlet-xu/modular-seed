@@ -1,7 +1,5 @@
 import Vue from 'vue';
 import Router, { RouteConfig } from 'vue-router';
-
-import store from '../store';
 import HomePage from '../views/home/home.vue';
 import IncidentType from '../views/incident-type/incident-type.vue';
 import FullCalendarTest from '../views/fullcalendar-test/fullcalendar-test.vue';
@@ -10,6 +8,8 @@ import ElectronWebviewTest from '../views/electron-webview-test/electron-webview
 import FormTest from '../views/form-test/form-test.vue';
 import RemTest from '../views/rem-test/rem-test.vue';
 import TansitionTest from '../views/transition-test/transition-test.vue';
+import DragTest from '../views/drag-test/drag-test.vue';
+
 
 Vue.use(Router);
 
@@ -22,6 +22,7 @@ export const constantRouterMap: RouteConfig[] = [
   { path: '/form-test', name: 'Router.formTest', component: FormTest },
   { path: '/rem-test', name: 'Router.remTest', component: RemTest },
   { path: '/tansition-test', name: 'Router.tansitionTest', component: TansitionTest },
+  { path: '/drag-test', name: 'Router.dragTest', component: DragTest }
 ];
 
 const router = new Router({

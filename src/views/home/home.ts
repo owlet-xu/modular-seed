@@ -28,6 +28,10 @@ export default class Home extends Vue {
     this.$router.push('/incident-type');
   }
 
+  dragTest() {
+    this.$router.push('/drag-test');
+  }
+
   toCalendar() {
     this.$router.push('/fullcalendar-test');
   }
