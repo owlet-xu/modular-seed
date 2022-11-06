@@ -1,15 +1,103 @@
 .drag-test {
   width: 100%;
   height: 100%;
+  display: flex;
   .drag-container {
-    width: 1200px;
+    width: 1000px;
     height: 800px;
     border: 1px solid red;
     position: relative;
+    flex: 0 0 1000px;
     .drag-item {
       border: 1px solid black;
       position: absolute;
       background-color: orange;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .point {
+        display: block;
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        border: #08253b 1px solid;
+        position: absolute;
+      }
+      .top {
+        top: -2px;
+        left: 50%;
+        &:hover {
+          cursor: n-resize;
+        }
+      }
+      .bottom{
+        bottom: -2px;
+        left: 50%;
+        &:hover {
+          cursor: s-resize;
+        }
+      }
+      .left{
+        left: -2px;
+        top: 50%;
+        &:hover {
+          cursor: w-resize;
+        }
+      }
+      .right{
+        right: -2px;
+        top: 50%;
+        &:hover {
+          cursor: e-resize;
+        }
+      }
+
+      .top-left{
+        top: -2px;
+        left: -2px;
+        &:hover {
+          cursor: nw-resize;
+        }
+      }
+
+      .bottom-left{
+        bottom: -2px;
+        left: -2px;
+        &:hover {
+          cursor: sw-resize;
+        }
+      }
+
+      .top-right{
+        top: -2px;
+        right: -2px;
+        &:hover {
+          cursor: ne-resize;
+        }
+      }
+
+      .bottom-right{
+        bottom: -2px;
+        right: -2px;
+        &:hover {
+          cursor: se-resize;
+        }
+      }
     }
+  }
+  .drag-tools {
+    flex: 1;
+  }
+  .remove-area {
+    background-color: red;
+    width: 100%;
+    height: 300px;
+  }
+  .drag-sample {
+    border: 1px solid black;
+    background-color: orange;
+    width: 200px;
+    height: 200px;
   }
 }

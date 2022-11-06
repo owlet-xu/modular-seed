@@ -1,13 +1,32 @@
-
- <template>
-    <div class="drag-test">
-      <div class='drag-container' @ondrop="drop" @ondragover="dragover" >
-        <div class='drag-item'
-             draggable='true'
-             :style='dragStyle'
-        @ondragstart='dragstart'></div>
+<template>
+  <div class='drag-test'>
+    <div id='dragContainer' class='drag-container'>
+      <div v-for='item in dragInfos'
+           @mousedown='mousedown($event, item)'
+           :id='item.id'
+           class='drag-item'  :style='getDragStyle(item)'>
+        位置：
+        {{ item.positionX }}
+        {{ item.positionY }}
+        {{item.id}}
+        长宽：
+        {{ item.height }}
+        {{ item.width }}
+        <div class="point top"  @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point left" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point right" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point bottom" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point top-left" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point top-right" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point bottom-left" @mousedown.stop='mousedownResize($event, item)'></div>
+        <div class="point bottom-right" @mousedown.stop='mousedownResize($event, item)'></div>
       </div>
     </div>
+    <div class='drag-tools'>
+      <div id='removeArea' class='remove-area' draggable='true' @click='isRemoveArea'>垃圾箱</div>
+      <div class='drag-sample' draggable='true' @click='addItem'>拖动我</div>
+    </div>
+  </div>
 </template>
-<script lang="ts" src='./drag-test.ts'></script>
-<style lang="scss" scoped src='./drag-test.scss'></style>
+<script lang='ts' src='./drag-test.ts'></script>
+<style lang='scss' scoped src='./drag-test.scss'></style>
