@@ -11,11 +11,43 @@ export default class DragTest extends Vue {
 
   private dragInfos: DragItem[] = [];
   private itemSelected!: DragItem;
-  clientX = 0;
-  clientY = 0;
+  clientX = 0; // 移动上一次的坐标
+  clientY = 0; // 移动上一次的坐标
   // div可修改的最小宽高
   minW = 8;
   minH = 8;
+  date = 0;
+
+  mounted() {
+    document.onkeydown = (ev) =>{
+      const keycode = ev.which || ev.keyCode;
+      this.moveByKey(keycode);
+    }
+  }
+
+  moveByKey(keycode: number) {
+    if (this.itemSelected && this.itemSelected.id) {
+      const odiv: any = document.getElementById(this.itemSelected.id);
+      switch (keycode) {
+        case 37://left功能
+          --this.itemSelected.left;
+          odiv.style.left = this.itemSelected.left + 'px';
+          break;
+        case 38://up
+          --this.itemSelected.top;
+          odiv.style.top = this.itemSelected.top + 'px';
+          break;
+        case 39://right
+          ++this.itemSelected.left;
+          odiv.style.left = this.itemSelected.left + 'px';
+          break;
+        case 40://down
+          ++this.itemSelected.top;
+          odiv.style.top = this.itemSelected.top + 'px';
+          break;
+      }
+    }
+  }
 
 
   getDragStyle(item: DragItem) {
@@ -75,25 +107,25 @@ export default class DragTest extends Vue {
           console.log('鼠标移动距离：' + a);
           console.log('offsetWidth：' + odiv.offsetWidth);
           this.itemSelected.width = Math.max(this.minW, odiv.offsetWidth + (ev.clientX - this.clientX));
-          odiv.style.width =  this.itemSelected.width + 'px';
+          odiv.style.width = this.itemSelected.width + 'px';
           this.clientX = ev.clientX;
         }
 
         // 左，西，修改宽度
         if (this.itemSelected.direc.indexOf('w') !== -1) {
           this.itemSelected.width = Math.max(this.minW, odiv.offsetWidth + (this.clientX - ev.clientX));
-          this.itemSelected.left -=  this.clientX - ev.clientX;
+          this.itemSelected.left -= this.clientX - ev.clientX;
           odiv.style.left = this.itemSelected.left + 'px';
-          odiv.style.width =  this.itemSelected.width + 'px';
+          odiv.style.width = this.itemSelected.width + 'px';
           this.clientX = ev.clientX;
         }
 
         // 上，北，修改高度
         if (this.itemSelected.direc.indexOf('n') !== -1) {
           this.itemSelected.height = Math.max(this.minH, odiv.offsetHeight + (this.clientY - ev.clientY));
-          this.itemSelected.top -=  this.clientY - ev.clientY;
+          this.itemSelected.top -= this.clientY - ev.clientY;
           odiv.style.top = this.itemSelected.top + 'px';
-          odiv.style.height =  this.itemSelected.height + 'px';
+          odiv.style.height = this.itemSelected.height + 'px';
           this.clientY = ev.clientY;
         }
         // 鼠标按下的位置在底部，修改高度
