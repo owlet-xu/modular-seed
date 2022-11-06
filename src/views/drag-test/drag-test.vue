@@ -6,12 +6,12 @@
            :id='item.id'
            class='drag-item'  :style='getDragStyle(item)'>
         位置：
-        {{ item.positionX }}
-        {{ item.positionY }}
-        {{item.id}}
+        left: {{ item.left }}
+        top: {{ item.top }}
+        id: {{item.id}}
         长宽：
-        {{ item.height }}
-        {{ item.width }}
+        height: {{ item.height }}
+        width: {{ item.width }}
         <div class="point top"  @mousedown.stop='mousedownResize($event, item)'></div>
         <div class="point left" @mousedown.stop='mousedownResize($event, item)'></div>
         <div class="point right" @mousedown.stop='mousedownResize($event, item)'></div>

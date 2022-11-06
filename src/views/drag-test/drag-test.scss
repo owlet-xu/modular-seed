@@ -16,11 +16,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      &:hover {
+        cursor: pointer;
+      }
       .point {
         display: block;
-        width: 10px;
-        height: 10px;
-        border-radius: 2px;
+        width: 5px;
+        height: 5px;
+        border-radius: 5px;
         border: #08253b 1px solid;
         position: absolute;
       }

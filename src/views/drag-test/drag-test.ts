@@ -19,7 +19,7 @@ export default class DragTest extends Vue {
 
 
   getDragStyle(item: DragItem) {
-    return `width: ${item.width}px;height: ${item.height}px;top: ${item.positionX};left: ${item.positionY}`;
+    return `width: ${item.width}px;height: ${item.height}px;top: ${item.left};left: ${item.top}`;
   }
 
   // 鼠标点击需要移动的方块
@@ -36,9 +36,8 @@ export default class DragTest extends Vue {
       let left = ev.clientX - disX;
       let top = ev.clientY - disY;
 
-      //绑定元素位置到positionX和positionY上面
-      item.positionX = left;
-      item.positionY = top;
+      item.left = left;
+      item.top = top;
 
       //移动当前元素
       odiv.style.left = left + 'px';
@@ -72,15 +71,28 @@ export default class DragTest extends Vue {
       if (this.itemSelected.resizeable) {
         // 鼠标按下的位置在右边，修改宽度
         if (this.itemSelected.direc.indexOf('e') !== -1) {
+          const a = this.clientX - ev.clientX;
+          console.log('鼠标移动距离：' + a);
+          console.log('offsetWidth：' + odiv.offsetWidth);
           this.itemSelected.width = Math.max(this.minW, odiv.offsetWidth + (ev.clientX - this.clientX));
           odiv.style.width =  this.itemSelected.width + 'px';
           this.clientX = ev.clientX;
         }
 
-        // 鼠标按下的位置在上部，修改高度
+        // 左，西，修改宽度
+        if (this.itemSelected.direc.indexOf('w') !== -1) {
+          this.itemSelected.width = Math.max(this.minW, odiv.offsetWidth + (this.clientX - ev.clientX));
+          this.itemSelected.left -=  this.clientX - ev.clientX;
+          odiv.style.left = this.itemSelected.left + 'px';
+          odiv.style.width =  this.itemSelected.width + 'px';
+          this.clientX = ev.clientX;
+        }
+
+        // 上，北，修改高度
         if (this.itemSelected.direc.indexOf('n') !== -1) {
           this.itemSelected.height = Math.max(this.minH, odiv.offsetHeight + (this.clientY - ev.clientY));
-          console.log(this.itemSelected.height);
+          this.itemSelected.top -=  this.clientY - ev.clientY;
+          odiv.style.top = this.itemSelected.top + 'px';
           odiv.style.height =  this.itemSelected.height + 'px';
           this.clientY = ev.clientY;
         }
@@ -89,13 +101,6 @@ export default class DragTest extends Vue {
           this.itemSelected.height = Math.max(this.minH, odiv.offsetHeight + (ev.clientY - this.clientY));
           odiv.style.height = this.itemSelected.height + 'px';
           this.clientY = ev.clientY;
-        }
-
-        // 鼠标按下的位置在左边，修改宽度
-        if (this.itemSelected.direc.indexOf('w') !== -1) {
-          this.itemSelected.width = Math.max(this.minW, odiv.offsetWidth + (this.clientX - ev.clientX));
-          odiv.style.width =  this.itemSelected.width + 'px';
-          this.clientX = ev.clientX;
         }
       }
     };
@@ -110,8 +115,8 @@ export default class DragTest extends Vue {
   addItem() {
     const item = new DragItem();
     item.id = this.dragInfos.length + 1 + '-id';
-    item.positionX = 200 * this.dragInfos.length;
-    item.positionY = 0;
+    item.left = 200 * this.dragInfos.length;
+    item.top = 0;
     this.dragInfos.push(item);
   }
 
@@ -124,8 +129,8 @@ export default class DragTest extends Vue {
     const x2 = x1 + dom.offsetWidth;
     const y1 = dom.offsetTop;
     const y2 = y1 + dom.offsetHeight;
-    if (item.positionX > x1 && item.positionX < x2) {
-      if (item.positionY > y1 && item.positionY < y2) {
+    if (item.left > x1 && item.left < x2) {
+      if (item.top > y1 && item.top < y2) {
         console.log('拖动到垃圾桶');
         this.dragInfos = this.dragInfos.filter((item2) => {
           return item2.id !== item.id;
